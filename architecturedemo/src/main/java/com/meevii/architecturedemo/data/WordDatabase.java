@@ -42,7 +42,6 @@ public abstract class WordDatabase extends RoomDatabase {
                     Observable.create(new ObservableOnSubscribe<Void>() {
                         @Override
                         public void subscribe(ObservableEmitter<Void> emitter) {
-                            INSTANCE.wordDao().deleteAll();
                             Word word1 = new Word();
                             word1.setWord("Hello");
                             INSTANCE.wordDao().insert(word1);

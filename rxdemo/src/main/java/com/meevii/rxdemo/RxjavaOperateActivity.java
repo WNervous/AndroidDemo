@@ -19,8 +19,10 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 public class RxjavaOperateActivity extends AppCompatActivity {
     public String TAG = "RxjavaOperateActivity";
@@ -28,6 +30,8 @@ public class RxjavaOperateActivity extends AppCompatActivity {
     Button map;
     @BindView(R.id.flatMap)
     Button flatMap;
+    @BindView(R.id.zip)
+    Button zip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +97,65 @@ public class RxjavaOperateActivity extends AppCompatActivity {
                 Log.d(TAG, s);
             }
         });
+    }
+
+    /**
+     * zip 操作符
+     * Zip通过一个函数将多个Observable发送的事件结合到一起，然后发送这些组合到一起的事件.
+     * 它按照严格的顺序应用这个函数。它只发射与发射数据项最少的那个Observable一样多的数据。
+     */
+    @OnClick(R.id.zip)
+    public void zio() {
+        Observable<Integer> observable1 = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                Log.d(TAG, "emitter 1");
+                emitter.onNext(1);
+                Thread.sleep(1000);
+
+                Log.d(TAG, "emitter 2");
+                emitter.onNext(2);
+                Thread.sleep(1000);
+
+                Log.d(TAG, "emitter 3");
+                emitter.onNext(3);
+                Thread.sleep(1000);
+
+                Log.d(TAG, "emitter 4");
+                emitter.onNext(4);
+                Thread.sleep(1000);
+//                emitter.onComplete();
+            }
+        }).subscribeOn(Schedulers.io());
+
+        Observable<String> observable2 = Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+                Log.d(TAG, "A");
+                emitter.onNext("A");
+                Thread.sleep(1000);
+                Log.d(TAG, "B");
+                emitter.onNext("B");
+                Thread.sleep(1000);
+                Log.d(TAG, "C");
+                emitter.onNext("C");
+                Thread.sleep(1000);
+
+            }
+        }).subscribeOn(Schedulers.io());
+
+        Disposable subscribe = Observable.zip(observable1, observable2, new BiFunction<Integer, String, String>() {
+            @Override
+            public String apply(Integer integer, String s) throws Exception {
+                return integer + "_" + s;
+            }
+        }).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                Log.d(TAG, "zip_" + s);
+            }
+        });
+
     }
 
     public static void open(Context context) {
