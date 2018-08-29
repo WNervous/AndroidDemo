@@ -1,1 +1,1 @@
-include ':app', ':patterndemo', ':roomlibrarydemo', ':rxdemo', ':architecturedemo', ':dialogsizechange'
+include ':app', ':patterndemo', ':roomlibrarydemo', ':rxdemo', ':architecturedemo', ':dialogsizechange', ':alarmmanagerdemo'
