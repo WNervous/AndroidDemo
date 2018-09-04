@@ -10,14 +10,26 @@ public class Repo {
     public String name;
     public String url;
 
+    public int age;
+
     public Repo() {
 
+        age = 1;
     }
 
     public Repo(int id, String name, String url) {
         this.id = id;
         this.name = name;
         this.url = url;
+        age = 0;
+    }
+
+    public int getAge() {
+        return age=0;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public int getId() {
@@ -50,6 +62,7 @@ public class Repo {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
+                ", age='" + age + '\'' +
                 '}';
     }
 }

@@ -1,11 +1,14 @@
 package com.meevii.roomlibrarydemo.data;
 
+import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
-@Database(entities = Repo.class, version = 1)
+@Database(entities = Repo.class, version = 2)
 public abstract class RepoDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "repoDatabase.db";
@@ -22,9 +25,20 @@ public abstract class RepoDatabase extends RoomDatabase {
         return Room.databaseBuilder(
                 context,
                 RepoDatabase.class,
-                DB_NAME).build();
+                DB_NAME)
+                .addMigrations(migration1_2)
+                .build();
     }
 
     public abstract RepoDao getRepoDao();
 
+    private static Migration migration1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE Repo"
+                    + " ADD COLUMN age INTEGER NOT NULL DEFAULT 10");
+            //        alter table 表名 add 列明 bit default 0 with values 需要加上后面的 with values
+
+        }
+    };
 }
