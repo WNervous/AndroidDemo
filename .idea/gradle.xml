@@ -13,9 +13,11 @@
             <option value="$PROJECT_DIR$/architecturedemo" />
             <option value="$PROJECT_DIR$/customview" />
             <option value="$PROJECT_DIR$/dialogsizechange" />
+            <option value="$PROJECT_DIR$/livedatademo" />
             <option value="$PROJECT_DIR$/patterndemo" />
             <option value="$PROJECT_DIR$/roomlibrarydemo" />
             <option value="$PROJECT_DIR$/rxdemo" />
+            <option value="$PROJECT_DIR$/viewmodel" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
