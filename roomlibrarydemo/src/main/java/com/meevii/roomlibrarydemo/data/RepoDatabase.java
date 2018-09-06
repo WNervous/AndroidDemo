@@ -8,7 +8,7 @@ import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-@Database(entities = Repo.class, version = 2)
+@Database(entities = Repo.class, version = 3)
 public abstract class RepoDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "repoDatabase.db";
@@ -26,7 +26,7 @@ public abstract class RepoDatabase extends RoomDatabase {
                 context,
                 RepoDatabase.class,
                 DB_NAME)
-                .addMigrations(migration1_2)
+                .addMigrations(migration1_2,migration2_3)
                 .build();
     }
 
@@ -37,6 +37,16 @@ public abstract class RepoDatabase extends RoomDatabase {
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("ALTER TABLE Repo"
                     + " ADD COLUMN age INTEGER NOT NULL DEFAULT 10");
+            //        alter table 表名 add 列明 bit default 0 with values 需要加上后面的 with values
+
+        }
+    };
+
+    private static Migration migration2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE Repo"
+                    + " ADD COLUMN isNew INTEGER NOT NULL DEFAULT 0");
             //        alter table 表名 add 列明 bit default 0 with values 需要加上后面的 with values
 
         }

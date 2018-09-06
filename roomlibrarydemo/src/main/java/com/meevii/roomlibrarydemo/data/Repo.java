@@ -11,10 +11,19 @@ public class Repo {
     public String url;
 
     public int age;
+    public boolean isNew;
 
     public Repo() {
 
         age = 1;
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
     }
 
     public Repo(int id, String name, String url) {
@@ -25,7 +34,7 @@ public class Repo {
     }
 
     public int getAge() {
-        return age=0;
+        return age = 0;
     }
 
     public void setAge(int age) {
@@ -62,7 +71,8 @@ public class Repo {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
-                ", age='" + age + '\'' +
+                ", age=" + age +
+                ", isNew=" + isNew +
                 '}';
     }
 }
