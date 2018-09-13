@@ -15,7 +15,7 @@ import android.view.View;
 import com.meevii.customview.R;
 
 public class ProgressView extends View {
-
+    public static final String TAG = "ProgressView";
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private RectF rectF = new RectF();
     /**
@@ -32,8 +32,13 @@ public class ProgressView extends View {
      */
     private @ColorInt
     int progressBgColor;
-
+    /**
+     * 进度条宽度
+     */
     private float mProgressWidth;
+
+    private int mHeight;
+    private int mWidth;
 
     public ProgressView(Context context) {
         super(context);
@@ -52,11 +57,49 @@ public class ProgressView extends View {
         a.recycle();
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        //获取测量模式
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        //获取测量大小
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        switch (heightMode) {
+            case MeasureSpec.EXACTLY:
+                mHeight = heightSize;
+                break;
+            case MeasureSpec.AT_MOST:
+                Log.d(TAG, "height:AT_MOST");
+                mHeight = 400;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                Log.d(TAG, "height:UNSPECIFIED");
+                break;
+        }
+        switch (widthMode) {
+            case MeasureSpec.EXACTLY:
+                mWidth = widthSize;
+                break;
+            case MeasureSpec.AT_MOST:
+                Log.d(TAG, "width:AT_MOST");
+                mWidth = 400;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                Log.d(TAG, "width:UNSPECIFIED");
+                break;
+        }
+        setMeasuredDimension(mWidth, mHeight);
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        rectF.set(100, 100, 400, 400);
+        canvas.drawColor(Color.MAGENTA);
+        Log.d(TAG, "width:" + mWidth + "__height:" + mHeight);
+        rectF.set(mProgressWidth / 2, mProgressWidth / 2, mWidth - mProgressWidth / 2, mWidth - mProgressWidth / 2);
         paint.setColor(progressBgColor);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(mProgressWidth);

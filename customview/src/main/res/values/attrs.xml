@@ -4,5 +4,6 @@
         <attr name="pv_progressColor" format="color" />
         <attr name="pv_progressBgColor" format="color" />
         <attr name="pv_progressWidth" format="dimension" />
+        <attr name="pv_progressRadius" format="dimension" />
     </declare-styleable>
 </resources>
