@@ -73,7 +73,7 @@ public class ProgressView extends View {
                 break;
             case MeasureSpec.AT_MOST:
                 Log.d(TAG, "height:AT_MOST");
-                mHeight = 400;
+                mHeight = 300;
                 break;
             case MeasureSpec.UNSPECIFIED:
                 Log.d(TAG, "height:UNSPECIFIED");
@@ -85,7 +85,7 @@ public class ProgressView extends View {
                 break;
             case MeasureSpec.AT_MOST:
                 Log.d(TAG, "width:AT_MOST");
-                mWidth = 400;
+                mWidth = 300;
                 break;
             case MeasureSpec.UNSPECIFIED:
                 Log.d(TAG, "width:UNSPECIFIED");
