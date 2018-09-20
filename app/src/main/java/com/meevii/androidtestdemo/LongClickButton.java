@@ -14,32 +14,30 @@ import java.lang.ref.WeakReference;
  * Created by admin on 15-6-1.
  */
 public class LongClickButton extends android.support.v7.widget.AppCompatButton {
+    private static final String TAG = "LongClickButton";
     /**
      * 长按连续响应的监听，长按时将会多次调用该接口中的方法直到长按结束
      */
     private LongClickRepeatListener repeatListener;
     /**
-     * 间隔时间（ms）
+     * 间隔时间（ms） 默认时间间隔0.3s
      */
-    private long intervalTime;
+    private long intervalTime = 300;
 
-    private MyHandler handler;
+    private LongPressHandler handler;
 
     public LongClickButton(Context context) {
         super(context);
-
         init();
     }
 
     public LongClickButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         init();
     }
 
     public LongClickButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         init();
     }
 
@@ -47,7 +45,7 @@ public class LongClickButton extends android.support.v7.widget.AppCompatButton {
      * 初始化监听
      */
     private void init() {
-        handler = new MyHandler(this);
+        handler = new LongPressHandler(new WeakReference<>(this));
         setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -70,7 +68,6 @@ public class LongClickButton extends android.support.v7.widget.AppCompatButton {
                 if (num % 5 == 0) {
                     handler.sendEmptyMessage(1);
                 }
-
                 SystemClock.sleep(intervalTime / 5);
             }
         }
@@ -79,18 +76,17 @@ public class LongClickButton extends android.support.v7.widget.AppCompatButton {
     /**
      * 通过handler，使监听的事件响应在主线程中进行
      */
-    private static class MyHandler extends Handler {
-        private WeakReference<LongClickButton> ref;
+    private static class LongPressHandler extends Handler {
+        private WeakReference<LongClickButton> weakReference;
 
-        MyHandler(LongClickButton button) {
-            ref = new WeakReference<>(button);
+        LongPressHandler(WeakReference<LongClickButton> button) {
+            weakReference = button;
         }
 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-
-            LongClickButton button = ref.get();
+            LongClickButton button = weakReference.get();
             if (button != null && button.repeatListener != null) {
                 button.repeatListener.repeatAction();
             }
@@ -114,7 +110,7 @@ public class LongClickButton extends android.support.v7.widget.AppCompatButton {
      * @param listener 监听
      */
     public void setLongClickRepeatListener(LongClickRepeatListener listener) {
-        setLongClickRepeatListener(listener, 100);
+        setLongClickRepeatListener(listener, intervalTime);
     }
 
     public interface LongClickRepeatListener {

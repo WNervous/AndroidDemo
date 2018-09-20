@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         longClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                i = 0;
                 textView.setText(String.valueOf(i));
                 Log.d("MainActivity", "onClick");
             }
