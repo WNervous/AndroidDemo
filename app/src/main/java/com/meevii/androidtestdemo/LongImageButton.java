@@ -13,6 +13,9 @@ public class LongImageButton extends android.support.v7.widget.AppCompatImageBut
     private AutoUpHandler handler = new AutoUpHandler(new WeakReference<>(this));
     private AddListener addListener;
     private int add = 0;
+    private int messageCount;
+
+    private int duration = 300;
 
     public LongImageButton(Context context) {
         super(context);
@@ -31,12 +34,16 @@ public class LongImageButton extends android.support.v7.widget.AppCompatImageBut
         int actionMasked = event.getActionMasked();
         switch (actionMasked) {
             case MotionEvent.ACTION_DOWN:
-                handler.sendEmptyMessage(1);
+                handler.sendEmptyMessageDelayed(1, duration);
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
                 handler.removeCallbacksAndMessages(null);
+                if (messageCount < 1) {
+                    performClick();
+                }
                 add = 0;
+                messageCount = 0;
                 break;
         }
         return super.onTouchEvent(event);
@@ -57,12 +64,30 @@ public class LongImageButton extends android.support.v7.widget.AppCompatImageBut
         @Override
         public void handleMessage(Message msg) {
             LongImageButton longImageButton = mLongImageButton.get();
+            int messageCount = longImageButton.getMessageCount();
             int add = longImageButton.getAdd();
+            messageCount++;
             add++;
-
             longImageButton.setAdd(add);
-            sendEmptyMessageDelayed(1, 300);
+            longImageButton.setMessageCount(messageCount);
+            sendEmptyMessageDelayed(1, longImageButton.getDuration());
         }
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public int getMessageCount() {
+        return messageCount;
+    }
+
+    public void setMessageCount(int messageCount) {
+        this.messageCount = messageCount;
     }
 
     public int getAdd() {
