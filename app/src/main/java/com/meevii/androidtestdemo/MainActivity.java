@@ -35,25 +35,25 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 i++;
                 textView.setText(String.valueOf(i));
-                Log.d("MainActivity", "imageButton:" + i);
             }
         });
 
         longClick.setLongClickRepeatListener(new LongClickButton.LongClickRepeatListener() {
             @Override
             public void repeatAction() {
-                i++;
+                i += 50;
                 textView.setText(String.valueOf(i));
-                Log.d("MainActivity", "add:" + i);
+                imageButton.setTranslationX(i);
+                Log.d("MainActivity", "TranslationX" + imageButton.getTranslationX() + "");
             }
         });
 
         longClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                i = 0;
+                imageButton.setTranslationX(0);
+                Log.d("MainActivity", "TranslationX" + imageButton.getTranslationX() + "");
                 textView.setText(String.valueOf(i));
-                Log.d("MainActivity", "onClick");
             }
         });
     }
