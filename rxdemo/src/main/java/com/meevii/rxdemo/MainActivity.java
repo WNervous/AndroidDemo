@@ -12,9 +12,12 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Button opearte;
 
     Observable<Integer> observable;
-    Observer<Integer> observer;
+    Observer<Integer>   observer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initObser();
-        Log.d(TAG, "currentThread:" + Thread.currentThread().getName());
+        initSingle();
+    }
+
+    private void initSingle() {
+        Single.just(1).map(new Function<Integer, String>() {
+
+            @Override
+            public String apply(Integer integer) {
+                return String.valueOf(integer);
+            }
+        }).map(new Function<String, Integer>() {
+
+            @Override
+            public Integer apply(String s) {
+                return null;
+            }
+        }).subscribe(new SingleObserver<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(Integer s) {
+                Log.d(TAG, s + "");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                //singlejust 不会掉用onError
+            }
+        });
+
     }
 
     private void initObser() {
@@ -203,16 +238,13 @@ public class MainActivity extends AppCompatActivity {
                 emitter.onComplete();
                 Log.d(TAG, "Thread:Observable" + Thread.currentThread().getName());
             }
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .observeOn(Schedulers.io())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) {
-                        Log.d(TAG, "Integer:" + integer);
-                        Log.d(TAG, "Thread:subscribe" + Thread.currentThread().getName());
-                    }
-                });
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.io()).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) {
+                Log.d(TAG, "Integer:" + integer);
+                Log.d(TAG, "Thread:subscribe" + Thread.currentThread().getName());
+            }
+        });
     }
 
     @OnClick(R.id.opearte)
