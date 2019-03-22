@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.meevii.roomlibrarydemo.data.Repo;
-import com.meevii.roomlibrarydemo.data.Reposity;
+import com.meevii.roomlibrarydemo.data.RepoUtils;
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity {
 
-    Reposity reposity;
+    RepoUtils reposity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        reposity = new Reposity();
+        reposity = new RepoUtils();
         findViewById(R.id.insert).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

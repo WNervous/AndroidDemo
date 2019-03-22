@@ -11,7 +11,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class Reposity {
+public class RepoUtils {
 
     public void insert(final Context context, final Repo repo) {
         Observable.create(new ObservableOnSubscribe<Void>() {

@@ -23,6 +23,7 @@
             <option value="$PROJECT_DIR$/roomlibrarydemo" />
             <option value="$PROJECT_DIR$/rxdemo" />
             <option value="$PROJECT_DIR$/viewmodel" />
+            <option value="$PROJECT_DIR$/webviewjs" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
