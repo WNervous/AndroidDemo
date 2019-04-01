@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
-        webView.addJavascriptInterface(new AndroidToJs(), "test"); //AndroidtoJS类对象映射到js的test对象
+        webView.addJavascriptInterface(new AndroidToJs(), "ggggg"); //AndroidtoJS类对象映射到js的test对象
         webView.loadUrl("file:///android_asset/js.html");
         //////////////////////////////////////////////////////////////////////////////
         // todo Andorid  通过webview 调用js 代码
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //////////////////////////////////////////////////////////////////////////////
-        // todo js  通过webview 调用Android 代码
+        //   js  通过webview 调用Android 代码
         //////////////////////////////////////////////////////////////////////////////
         /**
          * 方法一 ：通过 WebView的addJavascriptInterface（）进行对象映射
