@@ -38,4 +38,11 @@
         <attr name="v_timeMoveTop" format="dimension" />
         <attr name="v_textsize" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="SlideBlock">
+        <attr name="slide_color" format="color" />
+        <attr name="block_color" format="color" />
+        <attr name="block_width" format="dimension" />
+        <attr name="block_height" format="dimension" />
+    </declare-styleable>
 </resources>

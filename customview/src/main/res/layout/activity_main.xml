@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -48,23 +48,49 @@
     <!--android:text="dddddd" />-->
     <!--</LinearLayout>-->
 
-    <com.meevii.customview.stepview.FlowViewHorizontal
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:paddingLeft="20dp"
-        app:h_bg_radius="10dp"
-        app:h_bg_width="4dp"
-        app:h_max_step="2"
-        app:h_pro_radius="5dp"
-        app:h_pro_step="2"
-        app:h_pro_width="4dp"
-        app:h_text_padding="20dp"
-        app:h_time_padding="20dp" />
+    <!--<com.meevii.customview.stepview.FlowViewHorizontal-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="10dp"-->
+    <!--android:paddingLeft="20dp"-->
+    <!--app:h_bg_radius="10dp"-->
+    <!--app:h_bg_width="4dp"-->
+    <!--app:h_max_step="2"-->
+    <!--app:h_pro_radius="5dp"-->
+    <!--app:h_pro_step="2"-->
+    <!--app:h_pro_width="4dp"-->
+    <!--app:h_text_padding="20dp"-->
+    <!--app:h_time_padding="20dp" />-->
 
 
-    <com.meevii.customview.practice.RoundImageView
+    <!--<com.meevii.customview.practice.RoundImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@mipmap/ic_launcher" />-->
+
+
+    <com.meevii.customview.AutoNumber.AutoNumberTextView
+        android:id="@+id/AutoNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher" />
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:visibility="gone"
+        tools:text="dddddd" />
 
-</LinearLayout>
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:thumb="@drawable/thumb_seel"
+        android:tickMark="@mipmap/ic_launcher"
+        tools:progress="60" />
+
+    <com.meevii.customview.SlideBlock
+        android:id="@+id/slideBlock"
+        android:layout_width="80dp"
+        android:layout_height="8dp"
+        android:layout_centerInParent="true"
+        app:block_color="#3470EE"
+        app:slide_color="@android:color/darker_gray" />
+
+</RelativeLayout>

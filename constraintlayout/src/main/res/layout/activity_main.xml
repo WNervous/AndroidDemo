@@ -4,51 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<android.support.constraint.Guideline-->
-    <!--android:id="@+id/guideline"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical"-->
-    <!--app:layout_constraintGuide_percent="0.5" />-->
-
-    <!--<Button-->
-    <!--android:id="@+id/button"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="Button"-->
-    <!--app:layout_constraintLeft_toLeftOf="@+id/guideline"-->
-    <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-    <android.support.constraint.Placeholder
-        android:id="@+id/imageHolder"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:layout_width="80dp"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintLeft_toRightOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/image"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_height="50dp" />
-
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="kkkkkkkkkk"
         android:textSize="20dp"
@@ -59,9 +18,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="kkkkkkk"
+        android:text="kkkkkdddddddddkk"
         android:textSize="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView1" />
@@ -70,31 +28,17 @@
         android:id="@+id/barrier2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="end"
+        app:barrierDirection="right"
         app:constraint_referenced_ids="textView1 ,textView2" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="dkkkkkkkkkkkkkkkkkkkkkddddddddddddddd
-        kkkkkkkkkkkkkkkkkddddddddddddddddd
-        kkkkkkkkkkkkkkkkkdddddd
-        kkkkkkkkkkkkkkkkkdddddd
-        kkkkkkkkkkkkkkkkkdddddd
-        kkkkkkkkkkkkkkkkkdddddd
-        kkkkkkkkkkkkkkkkkdddddd
-        kkkkkkkkkkkkkkkkkdddddd
-        dddddddddddddddddddddddddd"
-        app:layout_constraintLeft_toRightOf="@+id/barrier2"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/replaceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="kkkk"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:text="kkkkkkddddddddddddddd
+        kkkkkkkkkkkkkkkkkddddddddddddddddd
+        kkkkkkkkkkkkkkkkkdddddd"
+        app:layout_constraintLeft_toRightOf="@+id/barrier2"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
