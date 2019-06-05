@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/alarmmanagerdemo" />
+            <option value="$PROJECT_DIR$/android_navigattion" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/architecturedemo" />
             <option value="$PROJECT_DIR$/buildflavors" />
@@ -21,6 +22,7 @@
             <option value="$PROJECT_DIR$/livedatademo" />
             <option value="$PROJECT_DIR$/mmkv" />
             <option value="$PROJECT_DIR$/multilprogress" />
+            <option value="$PROJECT_DIR$/notificaitontest" />
             <option value="$PROJECT_DIR$/patterndemo" />
             <option value="$PROJECT_DIR$/recycleviewdemo" />
             <option value="$PROJECT_DIR$/retroft" />
