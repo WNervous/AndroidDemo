@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.motion.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/buttonA"
+    <ImageView
+        android:id="@+id/ball"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher" />
 
-    <Button
-        android:id="@+id/buttonB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-</android.support.constraint.ConstraintLayout>
+</android.support.constraint.motion.MotionLayout>

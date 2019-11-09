@@ -16,7 +16,7 @@ public class AlarmUtils {
     private static long intervalTime = 24 * 3600 * 100;//一天的间隔
 
     public static void startAlarm(Context context, long starTime) {
-        alarmManager = context.getSystemService(AlarmManager.class);
+        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, VideoReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         Calendar calendar = Calendar.getInstance();
@@ -25,7 +25,7 @@ public class AlarmUtils {
     }
 
     public static void cancel(Context context) {
-        alarmManager = context.getSystemService(AlarmManager.class);
+        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, VideoReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         alarmManager.cancel(pi);
