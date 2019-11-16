@@ -17,6 +17,7 @@ import android.widget.RemoteViews;
 
 import com.wys.downloadmanagerdemo.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -90,28 +91,31 @@ public class DownloadService extends Service {
                 int currentLength = 0;
                 Log.d("DownloadService", "start");
                 String path = Environment.getExternalStorageDirectory().getPath() + "/AAAAImg/";
-                URL url = new URL("https://b-ssl.duitang.com/uploads/item/201807/30/20180730203858_UVwSn.jpeg");
+                URL url = new URL("https://cecemain.xxwolo.com/xxdoc-android-release-offline-8.2.0.apk");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setConnectTimeout(10000);
                 urlConnection.setRequestMethod("GET");
                 urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
                 InputStream inputStream = urlConnection.getInputStream();
                 Log.d("DownloadService", "length:" + urlConnection.getContentLength());
+                byte[] buffer = new byte[1024];
+                int len;
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                while ((len = inputStream.read(buffer)) != -1) {
+                    bos.write(buffer, 0, len);
+                    currentLength += len;
+//                    Message.obtain(handler, MSG_progress, ).sendToTarget();
+                    Log.d("DownloadService", "currentLength:" + currentLength);
+                }
+                bos.close();
                 //文件保存位置
                 File saveDir = new File(path);
                 if (!saveDir.exists()) {
                     saveDir.mkdir();
                 }
-                File file = new File(saveDir + File.separator + "123.jpeg");
+                File file = new File(saveDir + File.separator + "12344.apk");
                 FileOutputStream fos = new FileOutputStream(file);
-                byte[] buffer = new byte[1024];
-                int len;
-                while ((len = inputStream.read(buffer)) != -1) {
-                    fos.write(buffer);
-                    currentLength += len;
-                    //                    Message.obtain(handler, MSG_progress, ).sendToTarget();
-                    Log.d("DownloadService", "currentLength:" + currentLength);
-                }
+                fos.write(bos.toByteArray());
                 fos.close();
                 inputStream.close();
                 urlConnection.disconnect();
