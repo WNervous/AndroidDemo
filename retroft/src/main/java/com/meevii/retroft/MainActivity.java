@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 //        apiService.getRepos().enqueue(new Callback<List<Repo>>() {
 //            @Override
 //            public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
-//                //                Log.d("MainActivity",gson.toJson(response.body()));
+//                    //                Log.d("MainActivity",gson.toJson(response.body()));
 //            }
 //
 //            @Override
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void okhttp() {
+    private  static void okhttp() {
         Request.Builder builder = new Request.Builder().url("https://api.github.com/users/renwuxian/repo");
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.newCall(builder.build()).enqueue(new okhttp3.Callback() {
@@ -92,5 +92,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static void main(String [] args){
+        okhttp();
     }
 }

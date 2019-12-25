@@ -18,9 +18,11 @@
             <option value="$PROJECT_DIR$/dialogsizechange" />
             <option value="$PROJECT_DIR$/downloadmanagerdemo" />
             <option value="$PROJECT_DIR$/drawerlayout" />
+            <option value="$PROJECT_DIR$/eventbusdemo" />
             <option value="$PROJECT_DIR$/fileio" />
             <option value="$PROJECT_DIR$/gradledemo" />
             <option value="$PROJECT_DIR$/httpclientdemo" />
+            <option value="$PROJECT_DIR$/javareflect" />
             <option value="$PROJECT_DIR$/javathread" />
             <option value="$PROJECT_DIR$/livedatademo" />
             <option value="$PROJECT_DIR$/mmkv" />

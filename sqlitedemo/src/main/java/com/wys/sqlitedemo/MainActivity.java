@@ -1,15 +1,20 @@
 package com.wys.sqlitedemo;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
 import com.wys.sqlitedemo.db.FeedReaderContract;
 import com.wys.sqlitedemo.db.FeedReaderDbHelper;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +24,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ActivityCompat.requestPermissions(this,
+                                          new String[]{READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                          0);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         feedReaderDbHelper = new FeedReaderDbHelper(this);
     }
 
@@ -71,14 +84,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void delete(View view) {
         SQLiteDatabase writableDatabase = feedReaderDbHelper.getWritableDatabase();
-        writableDatabase.delete(FeedReaderContract.FeedEntry.TABLE_NAME, FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE + " = ?", new String[]{"title11"});
+        writableDatabase.delete(FeedReaderContract.FeedEntry.TABLE_NAME,
+                                FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE + " = ?",
+                                new String[]{"title11"});
     }
 
     public void update(View view) {
         SQLiteDatabase writableDatabase = feedReaderDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, "title11");
-        writableDatabase.update(FeedReaderContract.FeedEntry.TABLE_NAME, contentValues, FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE + " = ?", new String[]{"title1"});
+        writableDatabase.update(FeedReaderContract.FeedEntry.TABLE_NAME,
+                                contentValues,
+                                FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE + " = ?",
+                                new String[]{"title1"});
     }
 
     public void query(View view) {
@@ -89,13 +107,20 @@ public class MainActivity extends AppCompatActivity {
         //         How you want the results sorted in the resulting Cursor
         String sortOrder = FeedReaderContract.FeedEntry.COLUMN_NAME_SUBTITLE + " DESC";
 
-        Cursor cursor = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,   // The table to query
-                projection,             // The array of columns to return (pass null to get all)
-                null,              // The columns for the WHERE clause
-                null,          // The values for the WHERE clause
-                null,                   // don't group the rows
-                null,                   // don't filter by row groups
-                sortOrder               // The sort order
+        Cursor cursor = readableDatabase.query(FeedReaderContract.FeedEntry.TABLE_NAME,
+                                               // The table to query
+                                               projection,
+                                               // The array of columns to return (pass null to get all)
+                                               null,
+                                               // The columns for the WHERE clause
+                                               null,
+                                               // The values for the WHERE clause
+                                               null,
+                                               // don't group the rows
+                                               null,
+                                               // don't filter by row groups
+                                               sortOrder
+                                               // The sort order
         );
 
         while (cursor.moveToNext()) {
