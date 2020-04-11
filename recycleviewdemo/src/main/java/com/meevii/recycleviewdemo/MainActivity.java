@@ -11,23 +11,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
-
+/**
+ * @author wys
+ */
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private MyAdapter    mAdapter;
-    private int size = 30;
+    private int          size = 30;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.recycleView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setInitialPrefetchItemCount(0);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mAdapter = new MyAdapter();
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
     }
 
 
@@ -37,17 +39,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             Log.d("MyAdapter", "onCreateViewHolder");
-            return new MyHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_recy, viewGroup, false));
+            return new MyHolder(LayoutInflater.from(viewGroup.getContext())
+                                              .inflate(R.layout.item_recy, viewGroup, false));
         }
 
         @Override
         public void onBindViewHolder(@NonNull MyHolder myHolder, int i) {
             myHolder.textView.setText(String.valueOf(i + 1));
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull MyHolder holder, int position, @NonNull List<Object> payloads) {
-            super.onBindViewHolder(holder, position, payloads);
         }
 
         @Override

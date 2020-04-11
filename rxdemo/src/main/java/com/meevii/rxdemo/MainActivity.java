@@ -3,6 +3,7 @@ package com.meevii.rxdemo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 import butterknife.BindView;
@@ -21,17 +22,12 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
-    private String TAG = "MainActivity";
-    @BindView(R.id.observe)
-    Button button;
-    @BindView(R.id.chainObserve)
-    Button chainObserve;
-    @BindView(R.id.chainConsumer)
-    Button chainConsumer;
-    @BindView(R.id.threadTest)
-    Button threadTest;
-    @BindView(R.id.opearte)
-    Button opearte;
+    private                       String TAG = "MainActivity";
+    @BindView(R.id.observe)       Button button;
+    @BindView(R.id.chainObserve)  Button chainObserve;
+    @BindView(R.id.chainConsumer) Button chainConsumer;
+    @BindView(R.id.threadTest)    Button threadTest;
+    @BindView(R.id.opearte)       Button opearte;
 
     Observable<Integer> observable;
     Observer<Integer>   observer;
@@ -126,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * 1.当上游 发送onComplete（） 后，上游的其他事件会继续发送，当下游接受到onComplete（）时将不再接收 事件 ：
          * 2.发送 onError() 同上。
-         * 注意：onComplete 和onError 唯一并且互斥
+         * 注意：先发射
          *
          * 3.Dispose 当下游mDisposable.dispose() 后，会切断下上游的订阅关系，导致不会接收到以后的事件
          */
@@ -238,18 +234,38 @@ public class MainActivity extends AppCompatActivity {
                 emitter.onComplete();
                 Log.d(TAG, "Thread:Observable" + Thread.currentThread().getName());
             }
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.io()).subscribe(new Consumer<Integer>() {
-            @Override
-            public void accept(Integer integer) {
-                Log.d(TAG, "Integer:" + integer);
-                Log.d(TAG, "Thread:subscribe" + Thread.currentThread().getName());
-            }
-        });
+        })
+                                          .subscribeOn(Schedulers.io())
+                                          .observeOn(AndroidSchedulers.mainThread())
+                                          .observeOn(Schedulers.io())
+                                          .subscribe(new Consumer<Integer>() {
+                                              @Override
+                                              public void accept(Integer integer) {
+                                                  Log.d(TAG, "Integer:" + integer);
+                                                  Log.d(TAG, "Thread:subscribe" + Thread.currentThread().getName());
+                                              }
+                                          });
     }
 
     @OnClick(R.id.opearte)
     public void opearte() {
-        RxjavaOperateActivity.open(this);
+        OperateActivity.open(this);
     }
 
+    public void bianhua(View view) {
+        BianhuaOperateActivity.open(this);
+    }
+
+    public void filter(View view) {
+        FilterActivity.open(this);
+    }
+
+    public void condication(View view) {
+        CondicationActivity.open(this);
+    }
+
+    public void merge(View view) {
+        MergeActivity.open(this);
+
+    }
 }
